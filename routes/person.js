@@ -6,8 +6,8 @@ var knex = require('../con_db');
 
 router.get('/get_person_by_vn/:vn', async function (req, res, next) {
   let vn = req.params.vn;
-  let sql = ` SELECT p.hn ,p.cid ,CONCAT(p.pname,p.fname,' ',p.lname) as fullname  
-  FROM ovst o INNER JOIN patient p ON p.hn = o.hn WHERE  o.vn =? limit 1  `;
+  let sql = ` SELECT p.hn ,REPLACE(p.cardid,'-','') cid ,p.fullname FROM opd p
+  WHERE  concat(p.hn,'|',p.regdate,'|',p.frequency) =? limit 1  `;
   let data = await knex.raw(sql, [vn]);
   try {
     res.json({
