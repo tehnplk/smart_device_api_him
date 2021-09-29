@@ -86,20 +86,12 @@ router.post('/add_opdscreen_bp', async function (req, res, next) {
   let pulse = req.body.pulse;
   let depcode = req.body.depcode;
   let staff = req.body.staff;
-  let sql = ` replace into opdscreen_bp 
-  set opdscreen_bp_id = get_serialnumber('opdscreen_bp_id') 
-  ,vn =? ,bps=? ,bpd=? ,pulse=? ,depcode=? ,staff=? 
-  ,screen_date = CURRENT_DATE,screen_time = CURRENT_TIME ,rr=0,o2sat=0,temperature=0 `;
-  try {
-    let data = await knex.raw(sql, [vn, bps, bpd, pulse, depcode, staff]);
-    res.json({
-      'opdscreen_bp': 'added'
-    });
-  } catch (error) {
-    res.json({
-      'opdscreen_bp': 'error'
-    });
-  }
+
+  console.log('OPD_SCREENBP  Ignore...')
+
+  res.json({
+    'opdscreen_bp': 'ignore'
+  });
 
 
 });
