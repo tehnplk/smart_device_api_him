@@ -2,7 +2,7 @@
 
 <p>0) Install nodejs</p> 
 
-<p>1) git clone https://github.com/tehnplk/smart_device_api</p>
+<p>1) git clone https://github.com/tehnplk/smart_device_api_him</p>
 
 <p>2)cd smart_device_api && npm install</p>
 
