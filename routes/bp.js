@@ -87,7 +87,7 @@ router.post('/add_opdscreen_bp', async function (req, res, next) {
   let depcode = req.body.depcode;
   let staff = req.body.staff;
 
-  console.log('OPD_SCREENBP  Ignore...')
+  console.log('opd_screen was ignore...')
 
   res.json({
     'opdscreen_bp': 'ignore'
