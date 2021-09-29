@@ -27,7 +27,7 @@ router.get('/get_person_by_vn/:vn', async function (req, res, next) {
 
 router.get('/get_person_by_cid/:cid', async function (req, res, next) {
   let cid = req.params.cid;
-  let sql = ` SELECT hn,cardid cid,fullname from opd p where p.cardid = ? limit 1`;
+  let sql = ` SELECT p.hn,REPLACE(p.cardid,'-','') cid,fullname from opd p where REPLACE(p.cardid,'-','') = ? limit 1`;
   let data = await knex.raw(sql, [cid]);
 
   try {
@@ -48,12 +48,12 @@ router.get('/get_person_by_cid/:cid', async function (req, res, next) {
 
 router.get('/get_cid_by_hn/:hn', async function (req, res, next) {
   let hn = req.params.hn;
-  let sql = ` SELECT p.cardid  from opd p where p.hn = ?  limit 1`;
+  let sql = ` SELECT REPLACE(p.cardid,'-','') cid  from opd p where p.hn = ?  limit 1`;
   let data = await knex.raw(sql, [hn]);
 
   try {
     res.json({
-      'cid': data[0][0].cardid
+      'cid': data[0][0].cid
     })
   } catch (error) {
     res.json({
@@ -66,7 +66,7 @@ router.get('/get_cid_by_hn/:hn', async function (req, res, next) {
 router.get('/get_vn_by_cid/:cid', async function (req, res, next) {
   let cid = req.params.cid;
   let sql = ` select concat(o.hn,'|',o.regdate,'|',o.frequency) vn  from opd o 
-  where  o.cardid=? and regdate = CURRENT_DATE order by timereg desc limit 1 `;
+  where  REPLACE(o.cardid,'-','')=? and regdate = CURRENT_DATE order by timereg desc limit 1 `;
   let data = await knex.raw(sql, [cid]);
 
   try {
