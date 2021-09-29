@@ -1,0 +1,17 @@
+0) Install nodejs 
+
+1) git clone https://github.com/tehnplk/smart_device_api_him
+
+2)cd smart_device_api && npm install
+
+3)Edit con_db.js
+
+4)pm2 start ./bin/www --name smart_device_api
+
+5)http://localhost:3000
+
+6)http://localhost:3000/test
+
+7) On Raspbery Pi set GATEWAY=YES
+
+
