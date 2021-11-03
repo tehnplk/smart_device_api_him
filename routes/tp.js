@@ -72,13 +72,12 @@ router.post('/update_opdscreen', async function (req, res, next) {
     })
 
   } catch (error) {
+    console.log(error);
     res.json({
       'effect': '0'
     })
   }
 
 });
-
-
 
 module.exports = router;
