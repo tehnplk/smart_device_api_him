@@ -55,20 +55,26 @@ router.post('/update_opdscreen', async function (req, res, next) {
   let regdate = data[1];
   let frequency = data[2];
 
+  if (hn) {
+    let effect = await knex('opd')
+      .where({
+        'hn': hn,
+        'regdate': regdate,
+        'frequency': frequency
+      })
+      .update({
+        temper: temper,
+      })
 
-  let effect = await knex('opd')
-    .where({
-      'hn': hn,
-      'regdate': regdate,
-      'frequency': frequency
+    res.json({
+      'effect': effect
     })
-    .update({
-      temper: temper,
+  } else {
+    res.json({
+      'effect': 'null hn'
     })
+  }
 
-  res.json({
-    'effect': effect
-  })
 });
 
 
