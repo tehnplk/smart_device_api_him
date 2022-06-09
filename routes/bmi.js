@@ -59,6 +59,13 @@ router.post('/update_opdscreen', async function (req, res, next) {
   console.log('POST BMI DATA = ',vn, bw, high, bmi);
 
   let data = vn.split('|')
+  if(data.length != 3){
+    console.log('No hn.')
+    res.json({
+      'effect': 0
+    })
+    return false;
+  }
   let hn = data[0];
   let regdate = data[1];
   let frequency = data[2];
