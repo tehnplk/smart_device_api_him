@@ -48,7 +48,7 @@ router.get('/get_person_by_cid/:cid', async function (req, res, next) {
 
 router.get('/get_cid_by_hn/:hn', async function (req, res, next) {
   let hn = req.params.hn;
-  let sql = ` SELECT REPLACE(p.cardid,'-','') cid  from opd p where p.hn = ?  limit 1`;
+  let sql = ` SELECT REPLACE(p.cardid,'-','') cid  from opd p where p.hn = ?  and CURRENT_DATE >= p.regdate  ORDER BY p.regdate  DESC limit 1`;
   let data = await knex.raw(sql, [hn]);
 
   try {
